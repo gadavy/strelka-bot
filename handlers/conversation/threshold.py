@@ -18,8 +18,8 @@ class Threshold(TelegramBotPlugin):
         self.tgb = telegram_bot
         self.tgb.dispatcher.add_handler(ConversationHandler(
             entry_points=[
-                CallbackQueryHandler(self._start, pattern="thr"),
-                CommandHandler("set_threshold", self._start)
+                CallbackQueryHandler(self._start_cal, pattern="thr"),
+                CommandHandler("set_threshold", self._start_com)
             ],
 
             states={self.START: [MessageHandler(Filters.text, self._input)]},
@@ -28,7 +28,7 @@ class Threshold(TelegramBotPlugin):
         ))
 
     @TelegramBotPlugin.send_typing
-    def _start(self, update, context):
+    def _start_cal(self, update, context):
         query = update.callback_query
         t_id = query.message.chat_id
 
@@ -38,6 +38,21 @@ class Threshold(TelegramBotPlugin):
 
         menu_markup = InlineKeyboardMarkup(keyboard)
         query.edit_message_text(
+            text, reply_markup=menu_markup, parse_mode=ParseMode.MARKDOWN
+        )
+
+        return self.START
+
+    @TelegramBotPlugin.send_typing
+    def _start_com(self, update, context):
+        t_id = update.message.from_user.id
+
+        thr = self.tgb.data_base.get_user_thr(t_id)
+        text = f"Порог оповещений: *{thr}* р. Введите целое число что бы изменить."
+        keyboard = [[InlineKeyboardButton('Отмена ❌', callback_data='cancel')]]
+
+        menu_markup = InlineKeyboardMarkup(keyboard)
+        update.message.reply_text(
             text, reply_markup=menu_markup, parse_mode=ParseMode.MARKDOWN
         )
 
