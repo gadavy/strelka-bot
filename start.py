@@ -43,6 +43,7 @@ class StrelkaTelegramBot():
         file_log = logging.handlers.TimedRotatingFileHandler(
             logfile,
             when="h",
+            interval=12,
             encoding="utf-8"
         )
 
