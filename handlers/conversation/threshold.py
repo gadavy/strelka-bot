@@ -1,6 +1,7 @@
 from telegram import ParseMode
 from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
+from telegram.ext import CommandHandler
 from telegram.ext import ConversationHandler
 from telegram.ext import CallbackQueryHandler
 from telegram.ext import MessageHandler
@@ -16,7 +17,10 @@ class Threshold(TelegramBotPlugin):
     def __init__(self, telegram_bot):
         self.tgb = telegram_bot
         self.tgb.dispatcher.add_handler(ConversationHandler(
-            entry_points=[CallbackQueryHandler(self._start, pattern="thr")],
+            entry_points=[
+                CallbackQueryHandler(self._start, pattern="thr"),
+                CommandHandler("set_threshold", self._start)
+            ],
 
             states={self.START: [MessageHandler(Filters.text, self._input)]},
 
