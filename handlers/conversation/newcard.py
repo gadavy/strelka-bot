@@ -3,6 +3,7 @@ import requests
 from telegram import ParseMode
 from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
+from telegram.ext import CommandHandler
 from telegram.ext import ConversationHandler
 from telegram.ext import CallbackQueryHandler
 from telegram.ext import MessageHandler
@@ -21,7 +22,8 @@ class Newcard(TelegramBotPlugin):
                 entry_points=[
                     MessageHandler(Filters.regex(
                         "ДОБАВИТЬ КАРТУ 🆕"), self._start
-                    )
+                    ),
+                    CommandHandler("add_card", self._start)
                 ],
                 states={
                     self.START: [
