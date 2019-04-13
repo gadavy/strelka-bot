@@ -454,7 +454,7 @@ class DataBase():
 
         if "users" not in tables:
             try:
-                with open("sql/users.sql") as f:
+                with open("sql/tables/users.sql") as f:
                     cursor.execute(f.read())
             except Exception as ex:
                 logging.warning("Database error: {}".format(ex))
@@ -462,7 +462,7 @@ class DataBase():
 
         if "cards_strelka" not in tables:
             try:
-                with open("sql/strelka.sql") as f:
+                with open("sql/tables/strelka.sql") as f:
                     cursor.execute(f.read())
             except Exception as ex:
                 logging.warning("Database error: {}".format(ex))
@@ -470,7 +470,7 @@ class DataBase():
 
         if "user_strelka" not in tables:
             try:
-                with open("sql/user_strelka.sql") as f:
+                with open("sql/tables/user_strelka.sql") as f:
                     cursor.execute(f.read())
             except Exception as ex:
                 logging.warning("Database error: {}".format(ex))
@@ -492,48 +492,123 @@ class DataBase():
             procedures.append(p[1])
 
         if "add_user" not in procedures:
-            logging.warning("Procedure 'add_user' not found")
+            try:
+                with open("sql/procedures/add_user.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "add_strelka" not in procedures:
-            logging.warning("Procedure 'add_strelka' not found")
+            try:
+                with open("sql/procedures/add_strelka.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "add_user_strelka" not in procedures:
-            logging.warning("Procedure 'add_user_strelka' not found")
+            try:
+                with open("sql/procedures/add_user_strelka.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "del_user_strelka" not in procedures:
-            logging.warning("Procedure 'del_user_strelka' not found")
+            try:
+                with open("sql/procedures/del_user_strelka.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "exists_user" not in procedures:
-            logging.warning("Procedure 'exists_user' not found")
+            try:
+                with open("sql/procedures/exists_user.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "exists_strelka" not in procedures:
-            logging.warning("Procedure 'exists_strelka' not found")
+            try:
+                with open("sql/procedures/exists_strelka.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "exists_user_strelka" not in procedures:
-            logging.warning("Procedure 'exists_user_strelka' not found")
+            try:
+                with open("sql/procedures/exists_user_strelka.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "get_cards" not in procedures:
-            logging.warning("Procedure 'get_cards' not found")
+            try:
+                with open("sql/procedures/get_cards.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "get_users_low_balance" not in procedures:
-            logging.warning("Procedure 'get_users_low_balance' not found")
+            try:
+                with open("sql/procedures/get_users_low_balance.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "get_user_cards" not in procedures:
-            logging.warning("Procedure 'get_user_cards' not found")
+            try:
+                with open("sql/procedures/get_user_cards.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "get_user_ntf" not in procedures:
-            logging.warning("Procedure 'get_user_ntf' not found")
+            try:
+                with open("sql/procedures/get_user_ntf.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "get_user_thr" not in procedures:
-            logging.warning("Procedure 'get_user_thr' not found")
+            try:
+                with open("sql/procedures/get_user_thr.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "update_strelka_balance" not in procedures:
-            logging.warning("Procedure 'update_strelka_balance' not found")
+            try:
+                with open("sql/procedures/update_strelka_balance.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "update_user_ntf" not in procedures:
-            logging.warning("Procedure 'update_user_ntf' not found")
+            try:
+                with open("sql/procedures/update_user_ntf.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         if "update_user_thr" not in procedures:
-            logging.warning("Procedure 'update_user_thr' not found")
+            try:
+                with open("sql/procedures/update_user_thr.sql") as f:
+                    cursor.execute(f.read())
+            except Exception as ex:
+                logging.warning("Database error: {}".format(ex))
+            connection.commit()
 
         connection.close()
