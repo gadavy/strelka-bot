@@ -2,8 +2,7 @@ import os
 import logging
 import importlib
 
-from telegram import ChatAction
-from telegram import ParseMode
+import telegram
 from telegram.ext import Updater
 
 from confmanager import ConfigManager as Cfg
@@ -78,11 +77,11 @@ class TelegramBot():
         if update.message:
             update.message.reply_text(
                 text=error_msg,
-                parse_mode=ParseMode.MARKDOWN)
+                parse_mode=telegram.ParseMode.MARKDOWN)
         elif update.callback_query:
             update.callback_query.message.reply_text(
                 text=error_msg,
-                parse_mode=ParseMode.MARKDOWN)
+                parse_mode=telegram.ParseMode.MARKDOWN)
 
     def _load_handlers(self, folder):
         """Load hendlers for bot."""
@@ -119,7 +118,7 @@ class TelegramBotPlugin():
         def _send_typing_action(self, update, context, *args, **kwargs):
             context.bot.send_chat_action(
                 chat_id=update.effective_message.chat_id,
-                action=ChatAction.TYPING
+                action=telegram.ChatAction.TYPING
             )
             return func(self, update, context, *args, **kwargs)
         return _send_typing_action
