@@ -7,7 +7,7 @@ This is the code for my Telegram Bot. You can find it here: https://telegram.me/
 ### Other Software:
 
  * PyMySQL
- * python-telegram-bot 12.0.0b1
+ * python-telegram-bot v12.0.0b1
  * requests
  
 ### Database
