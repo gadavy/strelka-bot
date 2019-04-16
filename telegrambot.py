@@ -108,6 +108,9 @@ class TelegramBot():
 
 
 class TelegramBotPlugin():
+
+    ADMIN_LIST = Cfg.get("admin_id")
+
     """Plugins for telegram bot."""
     def __init__(self, telegram_bot):
         self.tgb = telegram_bot
@@ -115,18 +118,18 @@ class TelegramBotPlugin():
     @classmethod
     def send_typing(cls, func):
         """Sends typing action while processing func command."""
-        def _send_typing_action(self, update, context, *args, **kwargs):
+        def wrapped(self, update, context, *args, **kwargs):
             context.bot.send_chat_action(
                 chat_id=update.effective_message.chat_id,
                 action=telegram.ChatAction.TYPING
             )
             return func(self, update, context, *args, **kwargs)
-        return _send_typing_action
+        return wrapped
 
     @classmethod
     def add_user(cls, func):
         """Add user to data base."""
-        def _add_user(self, update, context, *args, **kwargs):
+        def wrapped(self, update, context, *args, **kwargs):
             if update.message:
                 data = update.message.from_user
             elif update.inline_query:
@@ -140,4 +143,17 @@ class TelegramBotPlugin():
                     logging.warning("Can't save usage - {}".format(update))
 
             return func(self, update, context, *args, **kwargs)
-        return _add_user
+        return wrapped
+
+    @classmethod
+    def restricted(cls, func):
+        """Restrict the access of a handler to only ADMIN_LIST"""
+        def wrapped(self, update, context, *args, **kwargs):
+            user_id = update.effective_user.id
+            if user_id not in TelegramBotPlugin.ADMIN_LIST:
+                logging.info(
+                    "Unauthorized access denied for {}.".format(user_id)
+                )
+                return
+            return func(update, context, *args, **kwargs)
+        return wrapped
