@@ -36,7 +36,6 @@ class Settings(TelegramBotPlugin):
         menu_markup = InlineKeyboardMarkup(keyboard)
         update.message.reply_text(text, reply_markup=menu_markup)
 
-    @TelegramBotPlugin.send_typing
     def _cbk_notification(self, update, context):
         query = update.callback_query
         t_id = query.message.chat_id

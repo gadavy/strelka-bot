@@ -44,7 +44,6 @@ class Remove(TelegramBotPlugin):
         else:
             update.message.reply_text("У Вас нет привязанных карт.")
 
-    @TelegramBotPlugin.send_typing
     def _cbk_remove(self, update, context):
         query = update.callback_query
 
