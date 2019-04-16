@@ -1,5 +1,6 @@
 import requests
 
+from telegram import ParseMode
 from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
 from telegram.ext import Filters
@@ -46,7 +47,6 @@ class Balance(TelegramBotPlugin):
         else:
             update.message.reply_text("У Вас нет привязанных карт.")
 
-    @TelegramBotPlugin.send_typing
     def _cbk_balance(self, update, context):
         query = update.callback_query
         card = query.data[7::]
@@ -64,8 +64,10 @@ class Balance(TelegramBotPlugin):
             text = "Возникла ошибка:\n{}".format(ex)
 
         else:
-            text = "Баланс карты\n№ {}\nсоставляет: {} руб.".format(card,
-                                                                    result)
+            text = (
+                "Баланс карты _№{}_\nсоставляет: {} руб."
+                .format(card[-4::], result)
+            )
 
         finally:
-            query.edit_message_text(text=text)
+            query.edit_message_text(text=text, parse_mode=ParseMode.MARKDOWN)
