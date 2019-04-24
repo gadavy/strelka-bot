@@ -1,4 +1,4 @@
-CREATE DEFINER=`strelkabot`@`%` PROCEDURE `add_user_strelka`(IN t_id BIGINT(20), IN c_num TEXT)
+CREATE PROCEDURE `add_user_strelka`(IN t_id BIGINT(20), IN c_num TEXT)
 BEGIN
 INSERT INTO user_strelka ( 
 	user_id,

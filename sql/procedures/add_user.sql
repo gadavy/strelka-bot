@@ -1,4 +1,4 @@
-CREATE DEFINER=`strelkabot`@`%` PROCEDURE `add_user`(IN t_id BIGINT(20), IN f_name TEXT, IN l_name TEXT, IN u_name TEXT, IN lang TEXT)
+CREATE PROCEDURE `add_user`(IN t_id BIGINT(20), IN f_name TEXT, IN l_name TEXT, IN u_name TEXT, IN lang TEXT)
 BEGIN
 INSERT INTO users (
 	telegram_id,
