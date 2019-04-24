@@ -1,0 +1,16 @@
+{
+    "telegram": {
+        "proxy_url": "socks5h://127.0.0.1:9050/",
+        "read_timeout": 30,
+        "connect_timeout": 20,
+        "con_pool_size": 10
+    },
+    "data_base": {
+        "host": "HOST",
+        "port": 3306,
+        "user": "USER",
+        "password": "PASSWORD",
+        "db_name": "DB_NAME",
+        "charset": "utf8mb4"
+    }
+}
