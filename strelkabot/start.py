@@ -49,7 +49,7 @@ class StrelkaTelegramBot():
             "--db-tab",
             dest="tables",
             help="create db tables",
-            default=True,  # TODO Заменить на False как закончу.
+            default=False,
             required=False)
 
         # Create database procedures.
@@ -57,7 +57,7 @@ class StrelkaTelegramBot():
             "--db-proc",
             dest="procedures",
             help="create db procedures",
-            default=True,  # TODO Заменить на False как закончу.
+            default=False,
             required=False)
 
         # Save logfile.
