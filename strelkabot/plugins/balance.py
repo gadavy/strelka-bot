@@ -61,6 +61,6 @@ class Balance(TelegramBotPlugin):
             query.edit_message_text(text=msg)
 
         else:
-            txt = "{}, баланс карты _№{}_\nсоставляет: {} руб."
-            msg = txt.format(data[1], data[2][-4::], data[3] // 100)
+            txt = "Баланс карты _№{}_\nсоставляет: {} руб."
+            msg = txt.format(data[2][-4::], data[3] // 100)
             query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
