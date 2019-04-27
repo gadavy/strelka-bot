@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `username` TEXT NULL DEFAULT NULL,
     `language` TEXT NULL DEFAULT NULL,
     `notification` BOOLEAN DEFAULT 1,
-    `threshold` INT NOT NULL DEFAULT 80,
+    `threshold` INT NOT NULL DEFAULT 8000,
     `date_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`))
 ENGINE = InnoDB

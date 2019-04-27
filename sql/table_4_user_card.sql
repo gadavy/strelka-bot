@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `user_strelka` (
+CREATE TABLE IF NOT EXISTS `user_card` (
     `user_id` INT NOT NULL,
     `card_id` INT NOT NULL,
     INDEX `fk_user_id_idx` (`user_id` ASC),
