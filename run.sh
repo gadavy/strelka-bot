@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3.7 strelkabot
+python3.7 -m strelkabot
