@@ -6,9 +6,11 @@ This is the code for my Telegram Bot. You can find it here: https://telegram.me/
 
 ### Other Software:
 
- * PyMySQL
- * python-telegram-bot v12.0.0b1
- * requests
+ * aiohttp==3.5.4   
+ * PyMySQL==0.9.3   
+ * PySocks==1.6.8   
+ * python-telegram-bot==12.0.0b1
+ * requests==2.21.0  
  
 ### Database
 
