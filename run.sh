@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3.7 __main__.py
+python3.7 strelkabot

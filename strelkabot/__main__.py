@@ -1,3 +1,3 @@
-from start import StrelkaTelegramBot
+from strelkabot.start import StrelkaTelegramBot
 
 StrelkaTelegramBot().start()
