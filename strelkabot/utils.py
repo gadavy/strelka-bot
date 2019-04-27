@@ -74,19 +74,19 @@ class TelegramBotPlugin():
         return wrapped
 
     @classmethod
-    def add_user(cls, func):
+    def insert_user(cls, func):
         """Decorator, add user to data base if he doesn't exist."""
         def wrapped(self, update, context, *args, **kwargs):
             if update.message:
-                data = update.message.from_user
+                data = update.message.from_user.__dict__
             elif update.inline_query:
-                data = update.effective_user
+                data = update.effective_user.__dict__
             else:
                 logging.warning("Can't save usage - {}".format(update))
 
             if self.tg.db.exists_user(data) is False:
-                if self.tg.db.add_user(data) is not True:
-                    logging.warning("Can't save user - {}".format(data.id))
+                if self.tg.db.insert_user(data) is not True:
+                    logging.warning("Can't save user - {}".format(data["id"]))
 
             return func(self, update, context, *args, **kwargs)
         return wrapped

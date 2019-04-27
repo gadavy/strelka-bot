@@ -24,7 +24,7 @@ class StrelkaTelegramBot():
         self._init_logger(log_path, log_level)
 
         # Create database.
-        self.database = Database()
+        self.database = Database(self.args.tables, self.args.procedures)
 
         # Create bot.
         bot_token = self._get_bot_token()
@@ -35,7 +35,7 @@ class StrelkaTelegramBot():
         desc = "Telegram bot for strelkacard."
         parser = ArgumentParser(description=desc)
 
-        # Config file path
+        # Config file path.
         parser.add_argument(
             "-cfg",
             dest="config",
@@ -43,6 +43,22 @@ class StrelkaTelegramBot():
             default="config/config.json",
             required=False,
             metavar="FILE")
+
+        # Create database tables.
+        parser.add_argument(
+            "--db-tab",
+            dest="tables",
+            help="create db tables",
+            default=True,  # TODO Заменить на False как закончу.
+            required=False)
+
+        # Create database procedures.
+        parser.add_argument(
+            "--db-proc",
+            dest="procedures",
+            help="create db procedures",
+            default=True,  # TODO Заменить на False как закончу.
+            required=False)
 
         # Save logfile.
         parser.add_argument(
