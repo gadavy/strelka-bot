@@ -14,11 +14,11 @@ class Job(TelegramBotPlugin):
 
         self.tg.job_queue.run_repeating(self._update_balance,
                                         interval=1800,
-                                        first=60)
+                                        first=1)
 
         self.tg.job_queue.run_repeating(self._send_balance,
                                         interval=3600,
-                                        first=1)
+                                        first=180)
 
     def _send_balance(self, context):
         info = self.tg.db.select_user_balance()
