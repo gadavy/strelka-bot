@@ -1,3 +1,6 @@
+import logging
+import requests
+
 from telegram import ParseMode
 from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
@@ -56,11 +59,42 @@ class Balance(TelegramBotPlugin):
         data = self.tg.db.select_user_balance(query.message.chat.id,
                                               query.data[2::])
 
-        if data is None:
-            msg = "‼ Возникла ошибка, попробуйте позже."
-            query.edit_message_text(text=msg)
+        if data is None or len(data) == 0:
+            msg = self._request(query.data[2::])
+            query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
 
         else:
             txt = "Баланс карты _№{}_\nсоставляет: {} руб."
-            msg = txt.format(data[2][-4::], data[3] // 100)
+            msg = txt.format(data[0][2][-4::], data[0][3] / 100)
             query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
+
+    def _request(self, card):
+        # region strelkakard params
+        url = "https://strelkacard.ru/api/cards/status/"
+        payload = {
+            "cardnum": card,
+            "cardtypeid": "3ae427a1-0f17-4524-acb1-a3f50090a8f3"}
+        headers = {
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, deflate, br",
+            "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+            "referer": "https://strelkacard.ru/",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5)",
+            "x-csrftoken": "null",
+            "x-requested-with": "XMLHttpRequest"
+        }
+        # endregion
+        try:
+            r = requests.get(url, params=payload, headers=headers)
+            balance = r.json()["balance"]
+
+            txt = "Баланс карты _№{}_\nсоставляет: {} руб."
+            msg = txt.format(card[-4::], balance / 100)
+
+            return msg
+
+        except Exception as ex:
+            logging.warning("balance Error: '{}'".format(ex))
+            msg = "‼ Возникла ошибка, попробуйте позже."
+
+            return msg

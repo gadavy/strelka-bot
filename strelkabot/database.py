@@ -240,7 +240,7 @@ class Database():
             for line in cursor.fetchall():
                 result.append(line)
 
-            return result if tg_id == 0 else result[0]
+            return result
 
     # Get user cards numbers from table 'user-card'.
     def select_user_cards(self, data):
