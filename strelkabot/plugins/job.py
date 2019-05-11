@@ -26,7 +26,7 @@ class Job(TelegramBotPlugin):
         for data in info:
             name = data[1]
             card = data[2][-4::]
-            balc = data[3] // 100
+            balc = data[3] / 100
 
             msg = f"{name}, на карте _№{card}_\nосталось всего {balc} рубля."
 
